@@ -66,12 +66,11 @@ router.post("/login", (req, res) => {
       return res.status(404).json({ email: "email not found" });
     }
 
-    //check password
-
+    // Check Password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
-        // user matched for JWT token
-        const payload = { id: user.id, name: user.name, avatar: user.avatar }; // create JWT payload
+        // User Matched
+        const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
 
         //sign token JWT
         jwt.sign(payload, keys.secretorKey, { expiresIn: 3600 }, () => {
