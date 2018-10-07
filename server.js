@@ -1,42 +1,38 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
-
-// point url's to files in routes/api 
-const users = require('./routes/api/users');
-const posts = require('./routes/api/posts');
-const profile = require('./routes/api/profile');
+// point url's to files in routes/api
+const users = require("./routes/api/users");
+const posts = require("./routes/api/posts");
+const profile = require("./routes/api/profile");
 
 const app = express();
 
 // Middleware for body parser
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// DB Config for Mongoose
 
-// DB Config for Mongoose 
-
-const db = require('./config/keys').mongoURI;
+const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
-.connect(db) // connects the const db 
-.then(() => console.log('MongoDB is connected') // if connected based on username /password in keys.js console log
-).catch(err => console.log('err')); // if there is a error display err message 
+  .connect(db) // connects the const db
+  .then(
+    () => console.log("MongoDB is connected") // if connected based on username /password in keys.js console log
+  )
+  .catch(err => console.log("err")); // if there is a error display err message
 
-app.get("/", (req,res) => res.send('Hello!!'));
+app.get("/", (req, res) => res.send("Hello!!"));
 
-//use routes 
-app.use('/api/users', users);
-app.use('/api/profile', profile);
-app.use('/api/posts', posts);
+//use routes
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
 
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server is running on localhost:${port}`));
-
-
-
-
