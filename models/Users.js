@@ -16,8 +16,8 @@ const UserSchema = new Schema({
     required: true
   },
   avatar: {
-    type: String,
-    required: true
+    type: String
+    // avatar required is not true ..
   },
   date: {
     type: Date,
